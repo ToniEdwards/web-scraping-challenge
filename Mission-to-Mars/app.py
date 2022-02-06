@@ -17,12 +17,12 @@ def scrape():
     #collection.insert_one(mars_dict)
     #client.close()
     mars = mongo.db.mars_db
-    mars.update({}, mars_dict, upsert=True)
+    mars.replace_one({}, mars_dict, upsert=True)
     return redirect('/', code=302)
 
 @app.route("/")
 def index():
-    mars_data = mongo.db.mars.find_one()
+    mars_data = mongo.db.mars_db.find_one()
     #mars_data = collection.find_one()
     return render_template("index.html", data=mars_data)
 
