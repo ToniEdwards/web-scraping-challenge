@@ -44,7 +44,7 @@ def scrape_news(browser):
             news_list.append(dictionary)
         except AttributeError as e:
             print(e)
-    return news_dict
+    return news_list
 
 def scrape_feature(browser):
     img_url = "https://spaceimages-mars.com/"
@@ -94,6 +94,6 @@ def scrape_images(browser):
             #print(astro_dict)
         except TypeError as e:
             print(html, e)
-    return hemi_dict
+    return img_urls
 if __name__ == "__main__" :
     print(scrape_data())
