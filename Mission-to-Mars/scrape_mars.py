@@ -33,7 +33,7 @@ def scrape_news(browser):
         try:
             #news_title.append(result.find("div", class_ = "content_title").text)
             news_title = result.find("div", class_ = "content_title").text
-            news_dict["title"] = news_title
+            news_dict["tit"] = news_title
             #news_desc.append(result.find("div", class_ = "article_teaser_body").text)
             news_desc = result.find("div", class_ = "article_teaser_body").text
             news_dict["desc"] = news_desc
@@ -44,7 +44,7 @@ def scrape_news(browser):
             news_list.append(dictionary)
         except AttributeError as e:
             print(e)
-    return news_dict
+    return news_list
 
 def scrape_feature(browser):
     img_url = "https://spaceimages-mars.com/"
@@ -88,12 +88,13 @@ def scrape_images(browser):
             hemi_img_url = f"{astro_url}{hemi_img}"
             hemi_dict["img_url"] = hemi_img_url
             hemi_title = response_soup.find("h2", class_="title").text
-            hemi_dict["title"] = hemi_title
+            hemi_dict["img_tit"] = hemi_title
             dictionary = hemi_dict.copy()
             img_urls.append(dictionary)
             #print(astro_dict)
         except TypeError as e:
             print(html, e)
-    return hemi_dict
+    return img_urls
+
 if __name__ == "__main__" :
     print(scrape_data())
