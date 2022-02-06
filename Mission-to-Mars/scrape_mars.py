@@ -31,13 +31,10 @@ def scrape_news(browser):
     news_dict = {}
     for result in results:
         try:
-            #news_title.append(result.find("div", class_ = "content_title").text)
             news_title = result.find("div", class_ = "content_title").text
             news_dict["tit"] = news_title
-            #news_desc.append(result.find("div", class_ = "article_teaser_body").text)
             news_desc = result.find("div", class_ = "article_teaser_body").text
             news_dict["desc"] = news_desc
-            #news_date.append(result.find("div", class_ = "list_date").text)
             news_date = result.find("div", class_ = "list_date").text
             news_dict["date"] = news_date
             dictionary = news_dict.copy()
@@ -52,7 +49,6 @@ def scrape_feature(browser):
     img_soup = bs(browser.html,"html.parser")
     img_results = img_soup.find("img", class_ = "headerimage")["src"]
     featured_image_url = f"{img_url}{img_results}"
-    #feature_dict = {"featured_image_url": featured_image_url}
     return featured_image_url
 
 def scrape_facts():
@@ -63,7 +59,7 @@ def scrape_facts():
     clean_mars_df = mars_df[1:]
     clean_mars_df.columns = header
     clean_mars_df = clean_mars_df.set_index(clean_mars_df.columns[0])
-    facts_html = clean_mars_df.to_html(classes="table-primary")
+    facts_html = clean_mars_df.to_html()
     return facts_html
 
 def scrape_images(browser):

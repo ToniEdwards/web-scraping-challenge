@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css\bootstrap.css">
+        <link rel="stylesheet" href="../static/styles/bootstrap.css">
         <title>AstroSpace</title>
     </head>
 
@@ -64,41 +64,44 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             <strong>Looking for live updates?</strong> <a href="/scrape" class="alert-link">Click here to update the report!</a>
         </div>
-        <h1 class="h1 text-primary">Mars News</h1>
-        <div class="list-group col-md-8"></div>
-            {% for news in data.news %}
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{news.tit}}</h5>
-                        <small>{{news.date}}</small>
-                    </div>
-                    <p class="mb-1">{{news.desc}}</p>
-                </a>
-            {% endfor %}
-        </div>    
-        
-        <h1 class="h1 text-primary">Featured Mars Image</h1>
-        <div class="col-md-6">
-              <img class="img-fluid"
-                src="{{data.feature}}"
-                alt="Responsive image"
-              />
-        </div>
-        <h1 class="h1 text-primary">Mars Facts</h1>
-        <div class="col-md-6">  
-            {{ data.facts | safe }}
+        <div class="container-fluid">
+            <div class="row"> 
+                <div class="col-md-6">
+                    <h1 class="h1 text-primary">Mars Featured Image</h1>
+                    <img class="img-fluid" src="{{data.feature}}" alt="Responsive image"/>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="h1 text-primary">Mars Facts</h1>
+                    {{ data.facts | safe }}
+                </div>
+            </div>
         </div>
         <h1 class="h1 text-primary">Mars Hemispheres</h1>
-        {% for hemi in data.hemispheres %}
-            <div class="card col-md-6">
-                <h3 class="card-header">{{hemi.img_tit}}</h3>
-                <div class="card-body">
-                    <img src="{{hemi.img_url | default('static/images/error.png', true)}}" class="d-block user-select-none" />
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </div>
-            </div> -->
-        {% endfor %}
+        <div class="container-fluid">
+            <div class="row">
+                {% for hemi in data.hemispheres %}
+                    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">{{hemi.img_tit}}</div>
+                        <div class="card-body">
+                        <img src="{{hemi.img_url | default('static/images/error.png', true)}}" class="img-thumbnail" />
+                        </div>
+                    </div>
+                {% endfor %}    
+            </div>
+            <h1 class="h1 text-primary">Mars News</h1>
+            <div class="list-group col-md-6">
+                {% for news in data.news %}
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{news.tit}}</h5>
+                            <small>{{news.date}}</small>
+                        </div>
+                        <p class="mb-1">{{news.desc}}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        
 
     </body>
 
