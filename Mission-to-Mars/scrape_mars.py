@@ -95,6 +95,5 @@ def scrape_images(browser):
         except TypeError as e:
             print(html, e)
     return img_urls
-
 if __name__ == "__main__" :
     print(scrape_data())
